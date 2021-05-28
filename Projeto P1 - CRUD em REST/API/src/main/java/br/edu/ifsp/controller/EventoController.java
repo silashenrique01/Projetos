@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.edu.ifsp.data.model.Evento;
 import br.edu.ifsp.data.vo.EventoVO;
 import br.edu.ifsp.services.EventoServices;
 
@@ -23,6 +25,7 @@ public class EventoController {
 	
 	@GetMapping
 	public List<EventoVO> findAll(){
+		
 		return services.findAll();
 	}
 	

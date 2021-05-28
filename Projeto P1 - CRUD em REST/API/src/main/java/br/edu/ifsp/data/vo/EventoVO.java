@@ -2,7 +2,6 @@ package br.edu.ifsp.data.vo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 public class EventoVO implements Serializable {
 
@@ -13,12 +12,8 @@ public class EventoVO implements Serializable {
 	private Date data_evento;
 	private String tema;
 	private int quantidade_pessoas;
-	private List<LoteVO> lotesVO;
-	private String imagem_URL;
 	private String telefone;
 	private String email;
-	private List<RedeSocialVO> redes_sociaisVO;
-	private List<ArtistaVO> artistasVO;
 	
 
 	public EventoVO() {
@@ -74,27 +69,6 @@ public class EventoVO implements Serializable {
 		this.quantidade_pessoas = quantidade_pessoas;
 	}
 
-
-	public List<LoteVO> getLotesVO() {
-		return lotesVO;
-	}
-
-
-	public void setLotesVO(List<LoteVO> lotesVO) {
-		this.lotesVO = lotesVO;
-	}
-
-
-	public String getImagem_URL() {
-		return imagem_URL;
-	}
-
-
-	public void setImagem_URL(String imagem_URL) {
-		this.imagem_URL = imagem_URL;
-	}
-
-
 	public String getTelefone() {
 		return telefone;
 	}
@@ -114,39 +88,15 @@ public class EventoVO implements Serializable {
 		this.email = email;
 	}
 
-
-	public List<RedeSocialVO> getRedes_sociaisVO() {
-		return redes_sociaisVO;
-	}
-
-
-	public void setRedes_sociaisVO(List<RedeSocialVO> redes_sociaisVO) {
-		this.redes_sociaisVO = redes_sociaisVO;
-	}
-	
-	public List<ArtistaVO> getArtistasVO() {
-		return artistasVO;
-	}
-
-
-	public void setArtistasVO(List<ArtistaVO> artistasVO) {
-		this.artistasVO = artistasVO;
-	}
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((artistasVO == null) ? 0 : artistasVO.hashCode());
 		result = prime * result + ((data_evento == null) ? 0 : data_evento.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((evento_id == null) ? 0 : evento_id.hashCode());
-		result = prime * result + ((imagem_URL == null) ? 0 : imagem_URL.hashCode());
 		result = prime * result + ((local == null) ? 0 : local.hashCode());
-		result = prime * result + ((lotesVO == null) ? 0 : lotesVO.hashCode());
 		result = prime * result + quantidade_pessoas;
-		result = prime * result + ((redes_sociaisVO == null) ? 0 : redes_sociaisVO.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		result = prime * result + ((tema == null) ? 0 : tema.hashCode());
 		return result;
@@ -162,11 +112,6 @@ public class EventoVO implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		EventoVO other = (EventoVO) obj;
-		if (artistasVO == null) {
-			if (other.artistasVO != null)
-				return false;
-		} else if (!artistasVO.equals(other.artistasVO))
-			return false;
 		if (data_evento == null) {
 			if (other.data_evento != null)
 				return false;
@@ -182,27 +127,12 @@ public class EventoVO implements Serializable {
 				return false;
 		} else if (!evento_id.equals(other.evento_id))
 			return false;
-		if (imagem_URL == null) {
-			if (other.imagem_URL != null)
-				return false;
-		} else if (!imagem_URL.equals(other.imagem_URL))
-			return false;
 		if (local == null) {
 			if (other.local != null)
 				return false;
 		} else if (!local.equals(other.local))
 			return false;
-		if (lotesVO == null) {
-			if (other.lotesVO != null)
-				return false;
-		} else if (!lotesVO.equals(other.lotesVO))
-			return false;
 		if (quantidade_pessoas != other.quantidade_pessoas)
-			return false;
-		if (redes_sociaisVO == null) {
-			if (other.redes_sociaisVO != null)
-				return false;
-		} else if (!redes_sociaisVO.equals(other.redes_sociaisVO))
 			return false;
 		if (telefone == null) {
 			if (other.telefone != null)

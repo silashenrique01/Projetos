@@ -17,14 +17,16 @@ public class EventoServices {
 	@Autowired
 	EventoRepository eventoRepository;
 	
-	public EventoVO create(EventoVO evento) {
-		var entity = DozerConverter.parseObject(evento, Evento.class);
+	public EventoVO create(EventoVO eventoVO) {	
+		var entity = DozerConverter.parseObject(eventoVO, Evento.class);
 		var vo = DozerConverter.parseObject(eventoRepository.save(entity), EventoVO.class);
 		return vo;
 	}
 	
 	public List<EventoVO> findAll(){
+		
 		return DozerConverter.parseListObjects(eventoRepository.findAll(), EventoVO.class);
+		
 	}
 	
 	public EventoVO findById(Long id) {
@@ -34,10 +36,8 @@ public class EventoServices {
 	
 	public EventoVO update(EventoVO eventoVO) {
 		var entity = eventoRepository.findById(eventoVO.getEvento_id()).orElseThrow(() -> new ResourceNotFoundException("Não encontramos registros para este ID"));		
-		var evento = DozerConverter.parseObject(entity, Evento.class);
-		
+	
 		entity.setLocal(eventoVO.getLocal());
-		entity.setLotes(evento.lotes);
 		entity.setTema(eventoVO.getTema());
 		entity.setQuantidade_pessoas(eventoVO.getQuantidade_pessoas());
 		entity.setData_evento(eventoVO.getData_evento());
