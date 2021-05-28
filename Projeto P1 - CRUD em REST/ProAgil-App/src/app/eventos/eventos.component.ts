@@ -3,8 +3,8 @@ import { DateTimeFormatPipe } from './../helpers/date-pipe-custom/datetime-forma
 import { ToastrService } from 'ngx-toastr';
 import { Evento } from './../_models/evento';
 import { EventoService } from './../_services/evento.service';
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component, OnInit } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
@@ -23,17 +23,8 @@ export class EventosComponent implements OnInit {
   eventos: Evento[];
   evento: Evento;
   modoSalvar = 'post';
-
-  imagemLargura = 50;
-  imagemMargem = 2;
-  mostrarImagem = false;
   registerForm: FormGroup;
   bodyDeletarEvento = '';
-
-  file: File;
-  fileNameToUpdate: string;
-
-  dataAtual: string;
 
   _filtroLista = '';
 
@@ -58,8 +49,6 @@ export class EventosComponent implements OnInit {
     this.modoSalvar = 'put';
     this.openModal(template);
     this.evento = Object.assign({}, evento);
-    this.fileNameToUpdate = evento.imagem_URL.toString();
-    this.evento.imagem_URL= '';
     this.registerForm.patchValue(this.evento);
   }
 
@@ -106,61 +95,23 @@ export class EventosComponent implements OnInit {
     );
   }
 
-  alternarImagem() {
-    this.mostrarImagem = !this.mostrarImagem;
-  }
-
   validation() {
     this.registerForm = this.fb.group({
       tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
       local: ['', Validators.required],
       data_evento: ['', Validators.required],
-      imagem_URL: ['', Validators.required],
       quantidade_pessoas: ['', [Validators.required, Validators.max(120000)]],
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
     });
   }
 
-  onFileChange(event) {
-    const reader = new FileReader();
-
-    if (event.target.files && event.target.files.length) {
-      this.file = event.target.files;
-      console.log(this.file);
-    }
-  }
-
-  uploadImagem() {
-    if (this.modoSalvar === 'post') {
-      const nomeArquivo = this.evento.imagem_URL.split('\\', 3);
-      this.evento.imagem_URL = nomeArquivo[2];
-
-      // this.eventoService.postUpload(this.file, nomeArquivo[2])
-      //   .subscribe(
-      //     () => {
-      //       this.dataAtual = new Date().getMilliseconds().toString();
-      //       this.getEventos();
-      //     }
-      //   );
-    } else {
-      this.evento.imagem_URL = this.fileNameToUpdate;
-      // this.eventoService.postUpload(this.file, this.fileNameToUpdate)
-      //   .subscribe(
-      //     () => {
-      //       this.dataAtual = new Date().getMilliseconds().toString();
-      //       this.getEventos();
-      //     }
-      //   );
-    }
-  }
 
   salvarAlteracao(template: any) {
     if (this.registerForm.valid) {
       if (this.modoSalvar === 'post') {
 
         this.evento = Object.assign({}, this.registerForm.value);
-        this.uploadImagem();
 
         this.eventoService.postEvento(this.evento).subscribe(
           (novoEvento: Evento) => {
@@ -174,13 +125,8 @@ export class EventosComponent implements OnInit {
       } else {
 
 
-        var teste = Object.assign({
-          evento_id:this.evento.evento_id,
-          artistas:this.evento.artistas,
-          redes_sociais:this.evento.redes_sociais,
-          lotes:this.evento.lotes}, this.registerForm.value);
+        var teste = Object.assign({evento_id:this.evento.evento_id }, this.registerForm.value);
 
-        this.uploadImagem();
         console.log(teste)
         this.eventoService.putEvento(teste).subscribe(
           () => {
@@ -196,8 +142,6 @@ export class EventosComponent implements OnInit {
   }
 
   getEventos() {
-    this.dataAtual = new Date().getMilliseconds().toString();
-
     this.eventoService.getAllEventos().subscribe(
       (_eventos: Evento[]) => {
         _eventos.forEach(element => {

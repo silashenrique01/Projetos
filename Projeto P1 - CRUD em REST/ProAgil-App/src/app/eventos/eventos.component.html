@@ -19,34 +19,21 @@
 <table class="table table-striped">
   <thead class="thead-dark text-center">
     <tr>
-      <th>Poster</th>
       <th>#</th>
       <th>Tema</th>
       <th>Local</th>
       <th>Data</th>
       <th>Qtd Pessoas</th>
-      <th>Lote</th>
       <th>opções</th>
     </tr>
   </thead>
   <tbody *ngIf="eventos && eventos.length">
     <tr *ngFor="let evento of eventosFiltrados">
-      <td>
-        <img src="./../../assets/img/{{evento.imagem_URL}}" width="150px" alt="">
-      </td>
       <td>{{evento.evento_id}}</td>
       <td>{{evento.tema}}</td>
       <td>{{evento.local}}</td>
       <td>{{evento.data_evento}}</td>
       <td>{{evento.quantidade_pessoas}}</td>
-      <td>
-        <div *ngIf="evento.lotes.length">
-          {{evento.lotes[0].nome | uppercase}}
-        </div>
-        <div *ngIf="!evento.lotes.length">
-          Não informado
-        </div>
-      </td>
       <td>
         <div class="btn-group">
           <button class="btn btn-success" tooltip="Editar" (click)="editarEvento(evento, template)">
@@ -134,25 +121,6 @@
               <div *ngIf="registerForm.get('quantidade_pessoas').hasError('max')
   && registerForm.get('quantidade_pessoas').touched" class="invalid-feedback">
                 Qtd Pessoas deve ser menor que 120000.
-              </div>
-            </div>
-            <div class="form-group col-md-9">
-              <label>Imagem</label>
-              <table>
-                <tr>
-                  <td>
-                    <button class="btn btn-success" (click)="file.click()">
-                      Enviar Imagem
-                    </button>
-                    <input type="file" #file [ngClass]="{'is-invalid': registerForm.get('imagem_URL').errors
-        && registerForm.get('imagem_URL').touched}" (change)="onFileChange($event)" class="form-control is-invalid"
-                      formControlName="imagem_URL" placeholder="" style="display: none">
-                  </td>
-                </tr>
-              </table>
-              <div *ngIf="registerForm.get('imagem_URL').hasError('required')
-  && registerForm.get('imagem_URL').touched" class="invalid-feedback">
-                Imagem é obrigatório.
               </div>
             </div>
           </div>
