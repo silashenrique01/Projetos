@@ -2,7 +2,6 @@ import { DateTimeFormatPipe } from './helpers/date-pipe-custom/datetime-format-p
 import { EventoService } from './_services/evento.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventosComponent } from './eventos/eventos.component';
@@ -18,7 +17,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxMaskModule } from 'ngx-mask';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { AuthService } from './_services/auth.service';
 
 @NgModule({
   declarations: [
@@ -49,9 +47,8 @@ import { AuthService } from './_services/auth.service';
   providers: [
     EventoService,
     ToastrService,
-    AuthService,
     DateTimeFormatPipe
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, EventosComponent]
 })
 export class AppModule { }

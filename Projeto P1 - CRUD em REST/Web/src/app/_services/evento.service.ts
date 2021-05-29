@@ -20,15 +20,6 @@ export class EventoService {
   getEventosById(id:number):Observable<Evento[]>{
     return this.http.get<Evento[]>(`${environment.url}/evento/${id}`);
   }
-
-  // postUpload(file: File, name: string) {
-  //   const fileToUplaod = <File>file[0];
-  //   const formData = new FormData();
-  //   formData.append('file', fileToUplaod, name);
-
-  //   return this.http.post(`${environment.url}/evento`, formData);
-  // }
-
   postEvento(evento: Evento) {
     return this.http.post(`${environment.url}/evento`, evento);
   }
