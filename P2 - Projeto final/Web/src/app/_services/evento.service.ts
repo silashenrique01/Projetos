@@ -12,26 +12,24 @@ export class EventoService {
   constructor(private http: HttpClient) { }
 
   getAllEventos():Observable<Evento[]>{
-    return this.http.get<Evento[]>(`${environment.url}/evento`);
+    return this.http.get<Evento[]>(`${environment.url}`);
   }
-  getEventosByTema(tema:string):Observable<Evento[]>{
-    return this.http.get<Evento[]>(`${environment.url}/evento/getEventoByTema/${tema}`);
-  }
+
   getEventosById(id:number):Observable<Evento[]>{
-    return this.http.get<Evento[]>(`${environment.url}/evento/${id}`);
+    return this.http.get<Evento[]>(`${environment.url}/${id}`);
   }
   postEvento(evento: Evento) {
-    return this.http.post(`${environment.url}/evento`, evento);
+    return this.http.post(`${environment.url}`, evento);
   }
 
   putEvento(evento: Evento) {
     evento.data_evento = "2020-04-19"
     console.log(evento)
-    return this.http.put(`${environment.url}/evento`, evento);
+    return this.http.put(`${environment.url}`, evento);
   }
 
   deleteEvento(id: number) {
-    return this.http.delete(`${environment.url}/evento/${id}`);
+    return this.http.delete(`${environment.url}/delete/${id}`);
   }
 
 }
